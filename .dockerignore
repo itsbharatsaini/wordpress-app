@@ -1,0 +1,24 @@
+# Ignore version control files
+.git
+.gitignore
+
+# Ignore editor files
+.vscode
+.idea
+*.sublime-workspace
+
+# Ignore log files
+*.log
+
+# Ignore Docker-specific files
+.dockerignore
+.docker
+
+# Ignore other temporary or generated files
+.DS_Store
+Thumbs.db
+
+# # Ignore WordPress core files not needed for the image
+# wp-content/uploads
+# wp-content/upgrade
+# wp-content/backup-db
