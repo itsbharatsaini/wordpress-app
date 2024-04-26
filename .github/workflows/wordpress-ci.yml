@@ -1,0 +1,44 @@
+name: WordPress CI
+
+on:
+  push:
+    branches:
+      - main
+      - 'feature/*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP 8.0
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+
+      - name: Install Composer Dependencies
+        run: composer config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
+
+
+      - name: Install WordPress Coding Standard
+        run: composer require --dev wp-coding-standards/wpcs:"^3.0"
+
+
+      - name: Updating WordPress Coding Standard
+        run: composer update wp-coding-standards/wpcs --with-dependencies
+
+      - name: Run phpcs for WordPress
+        run: vendor/bin/phpcs -ps . --standard=WordPress
+
+      # - name: Run phpcs for WordPress
+      #   run: ./vendor/bin/phpcs --standard=WordPress ./
+
+
+      - name: Build Docker Image
+        run: |
+          docker build -t itsbharatsaini/wordpress-app:latest .
+          docker login -u itsbharatsaini -p ${{ secrets.DOCKERHUB_TOKEN }}
+          docker push itsbharatsaini/wordpress-app:latest
