@@ -31,7 +31,7 @@ jobs:
         run: composer update wp-coding-standards/wpcs --with-dependencies
 
       - name: Run phpcs for WordPress
-        run: vendor/bin/phpcs -ps . --standard=WordPress
+        run: vendor/bin/phpcs -ps './wp-content\plugins\hello.php' --standard=WordPress
 
       # - name: Run phpcs for WordPress
       #   run: ./vendor/bin/phpcs --standard=WordPress ./
