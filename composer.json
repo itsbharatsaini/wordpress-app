@@ -1,0 +1,12 @@
+{
+    "name": "your-username/wordpress-project",
+    "description": "A WordPress project",
+    "require": {
+        "php": ">=7.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}
